@@ -1,0 +1,15 @@
+#spring.batch.job.names: ${job.name:NONE}
+spring :
+  batch:
+    job:
+      names: ${job.name:NONE} #job을 셋팅 할떄 job 이름을 파라미터로 넘길때 이렇게 설정함
+    jdbc:
+      initialize-schema: always
+  datasource:
+    url : jdbc:mysql://127.0.0.1:3306/spring_batch
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username : root
+    password : cksdn123
+
+  jpa:
+    show-sql: true
