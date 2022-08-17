@@ -3,8 +3,8 @@ package com.example.springbatchtutorial.job.TrMigrationConfig;
 
 import com.example.springbatchtutorial.job.TrMigrationConfig.accounts.AccountRepository;
 import com.example.springbatchtutorial.job.TrMigrationConfig.accounts.Accounts;
-import com.example.springbatchtutorial.job.TrMigrationConfig.orders.Orders;
 import com.example.springbatchtutorial.job.TrMigrationConfig.orders.OrderRepository;
+import com.example.springbatchtutorial.job.TrMigrationConfig.orders.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -17,9 +17,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemReader;
-import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
-import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
@@ -59,7 +57,7 @@ public class TrMigrationConfig {
                                 ItemProcessor trOrderProcessor,
                                 ItemWriter trOrderWriter) {
         return stepBuilderFactory.get("trMigrationStep")
-                .<Orders, Accounts>chunk(5)  //< 어떤데이터를 읽어올지, 쓸지> chunk몇 개 사이즈로 데이터를 처리할건지. >>> 5개의 데이터를 처리할 것이며, 읽어올 데이터=Order, 쓸 데이터 = Order 타입의 데이터
+                .<Orders, Accounts>chunk(5)  //< 어떤데이터를 읽어올지, 쓸지> chunk몇 개 사이즈로 데이터를 처리할건지. >>> 5개의 데이터를 처리할 것이며, 읽어올 데이터=Order, 쓸 데이터 = Accounts 타입의 데이터
                 .reader(trOrdersReader)
                 .processor(trOrderProcessor) //witer를 할수 있도록 프로세서를 쓸것. (메서드 생성 확인)
                 .writer(trOrderWriter) //가공이 된 데이터를 쓸 수 있도록 writer도 써줌. (메서드 생성 확인)
